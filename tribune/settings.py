@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from decouple import config
 import os
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
+    'tinymce',
     'news.apps.NewsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -83,11 +86,19 @@ WSGI_APPLICATION = 'tribune.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tribune',
+        'NAME': 'read',
         'USER' :  'moringa',
         'PASSWORD' : '12345',
     }
 }
+
+
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # Password validation
